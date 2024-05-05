@@ -2,9 +2,18 @@
 use strict;
 use warnings;
 use Cwd;
+use File::Path;
+
 my $cwd = cwd();
 print "The current working directory is:\n $cwd\n\n\n";
-chdir "C:/../../../output";
+
+my $output_dir = "output";
+unless (-e $output_dir and -d $output_dir) {
+    mkdir $output_dir or die "Unable to create output directory: $!";
+    print "Output directory created in the current working directory\n";
+}
+chdir $output_dir;
+
 #defining the format of the files needed
 print "\n====**File type =.txt** ========= sequence format = .fasta \n\n";
 #Get the name of the file with the protein sequence data.
